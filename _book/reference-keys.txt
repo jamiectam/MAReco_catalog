@@ -1,0 +1,11 @@
+purpose
+how-to-use-this-catalog
+SSTanomalies
+introduction-to-the-indicator
+nafo-division-trends
+NAO_w
+introduction-to-the-indicator-1
+nafo-division-trends-1
+ShannonDiversity
+introduction-to-the-indicator-2
+nafo-division-4x-trends
