@@ -11,5 +11,6 @@ rmd_files:
   - intro.Rmd
   - SST_anomalies.Rmd
   - NAO_w.Rmd
+  - SST.Rmd
   - Ecological.Rmd
   - ShannonDiversity.Rmd

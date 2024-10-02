@@ -1,0 +1,99 @@
+# Sea Surface Temperature {#SST}
+
+**Description**: 
+
+**Ecosystem Based Management Pillar**:
+
+  - Pressure and Stressors
+  
+**Sub-attribute**:  
+
+  - Climate and Oceanography
+
+**Data collection**: [Casault et al. 2024](https://publications.gc.ca/collections/collection_2024/mpo-dfo/Fs97-6-3589-eng.pdf) 
+
+## Introduction to the indicator
+
+### NAFO Division trends
+
+
+```{r nafo4xSSTBT, fig.align="center", message=FALSE, warning=FALSE, echo = FALSE,fig.width = 14, fig.pos='H',fig.cap="Sea Surface Temperature and Bottom temperature from fixed stations for 4X. Dotted lines denote the long-term mean."}
+
+require(tidyverse)
+require(ggplot2)
+require(patchwork)
+
+SST_ind_SS_4X<-azmpdata::Derived_Annual_Broadscale |>
+        dplyr::filter(area=="4XSS")|>
+        dplyr::select(YEAR=year,SST=sea_surface_temperature_from_satellite)
+SST_ind_SS_4Vn<-azmpdata::Derived_Annual_Broadscale |>
+        dplyr::filter(area=="4Vn")|>
+        dplyr::select(YEAR=year,SST=sea_surface_temperature_from_satellite) |>
+        drop_na()
+SST_ind_SS_4Vs<-azmpdata::Derived_Annual_Broadscale |>
+        dplyr::filter(area=="4Vs")|>
+        dplyr::select(YEAR=year,SST=sea_surface_temperature_from_satellite)|>
+        drop_na()
+SST_ind_SS_4W<-azmpdata::Derived_Annual_Broadscale |>
+        dplyr::filter(area=="4W")|>
+       dplyr:: select(YEAR=year,SST=sea_surface_temperature_from_satellite) |>
+        drop_na()
+
+mean_SST_4X <- SST_ind_SS_4X |> dplyr::summarise(mn=mean(SST, na.rm=TRUE))
+mean_SST_4Vn <- SST_ind_SS_4Vn |> dplyr::summarise(mn=mean(SST, na.rm=TRUE))
+mean_SST_4Vs <- SST_ind_SS_4Vs |> dplyr::summarise(mn=mean(SST, na.rm=TRUE))
+mean_SST_4W <- SST_ind_SS_4W |> dplyr::summarise(mn=mean(SST, na.rm=TRUE))
+
+pc1<-ggplot2::ggplot(SST_ind_SS_4X, aes(x = YEAR, y = SST)) +
+  theme_classic()+
+  geom_line( size=1)+
+  labs(x="4X")+
+  # geom_smooth(method=glm, se=F)+
+  geom_hline(data=mean_SST_4X, aes(yintercept=mn), linetype='dotted')+
+  annotate(geom = "rect",
+           xmin = 2016, xmax = 2020,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey", alpha = 0.2)  
+pc2<-ggplot2::ggplot(SST_ind_SS_4Vn, aes(x = YEAR, y = SST)) +
+  theme_classic()+
+  geom_line( size=1)+
+  labs(x="4Vn")+
+  # geom_smooth(method=glm, se=F)+
+  geom_hline(data=mean_SST_4Vn, aes(yintercept=mn), linetype='dotted')+
+  annotate(geom = "rect",
+           xmin = 2016, xmax = 2020,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey", alpha = 0.2)  
+pc3<-ggplot2::ggplot(SST_ind_SS_4Vs, aes(x = YEAR, y = SST)) +
+  theme_classic()+
+  geom_line( size=1)+
+  labs(x="4Vs")+
+  # geom_smooth(method=glm, se=F)+
+  geom_hline(data=mean_SST_4Vs, aes(yintercept=mn), linetype='dotted')+
+  annotate(geom = "rect",
+           xmin = 2016, xmax = 2020,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey", alpha = 0.2)  
+pc4<-ggplot2::ggplot(SST_ind_SS_4W, aes(x = YEAR, y = SST)) +
+  theme_classic()+
+  geom_line( size=1)+
+  labs(x="4W")+
+  # geom_smooth(method=glm, se=F)+
+  geom_hline(data=mean_SST_4W, aes(yintercept=mn), linetype='dotted')+
+  annotate(geom = "rect",
+           xmin = 2016, xmax = 2020,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey", alpha = 0.2)  
+
+(pc1|pc2)/(pc3|pc4)
+
+```
+
+## How to access the data
+
+```{r, eval=FALSE}
+
+azmpdata::Derived_Annual_Broadscale |>
+  dplyr::select(year, sea_surface_temperature_from_satellite)
+
+```
