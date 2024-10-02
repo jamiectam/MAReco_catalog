@@ -16,7 +16,14 @@
 
 ### NAFO Division trends
 
-![NAFO div SST anomalies](C:/Users/TAMJ/Documents/JCT work/SS Ecosystem Report/SS-Ecosystem-Report/figures/NAFO div SST anomalies.jpg)
+
+
+```r
+# Plot indicator
+
+```
+
+## How to access the data
 
 
 ```r
